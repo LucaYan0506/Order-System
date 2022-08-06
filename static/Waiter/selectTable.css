@@ -1,0 +1,9 @@
+body{
+    margin:0;
+}
+
+#table-container{
+    background:red;
+    height: calc(100% - 20px);
+    width:100%;
+}
