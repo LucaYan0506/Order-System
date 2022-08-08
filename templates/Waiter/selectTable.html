@@ -8,11 +8,18 @@
 </head>
 <body>
     <div id="table-container">
-
+        <h1 style="text-align:center">Select a table</h1>
+        {% for table in tables %}
+            <div id="table-{{table.pk}}">{{table.name}}</div>
+        {% endfor %}
     </div>
 
-    <div style="width:100%; height:20px;background:whitesmoke">
-        <button style="float:right">Next</button>
+    <div style="position:fixed;bottom:0;width:100%; height:100px;background:whitesmoke">
+        <button class="btn" id="next">Next</button>
+        <div style="clear:both"></div>
     </div>
+
+
+    <script src="{% static 'Waiter/selectTable.js' %}"></script>
 </body>
 </html>

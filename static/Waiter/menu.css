@@ -1,0 +1,285 @@
+:root{
+    --basket-number-items: '0';
+}
+
+html{
+    min-width: 255px;
+    scroll-behavior: smooth;
+    scroll-padding-top:80px;
+}
+
+body {
+    background-color: whitesmoke;
+    margin:0;
+}
+
+#nav{
+    width:100%;
+    height: 80px;
+    background:white;
+    display:flex;
+    position: fixed;
+    top:0;
+}
+
+#company-name{
+    background-color:rgb(78 198 223);
+    position: relative;
+    height: 80px;
+    width: 200px;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#basket{
+    width:50px;
+    position: relative;
+}
+#completed-order{
+    width:35px;
+}
+#basket-container::after{
+    content:var(--basket-number-items);
+    position: absolute;
+    color: white;
+    left: 31px;
+    top: -1px;
+    background: red;
+    padding: 0 5px;
+    border-radius: 50vw;
+}
+
+#basket-page-container,#order-page-container{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top:100vh;
+    left:0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#basket-page, #order-page{
+    background-color: white;
+    height: 60%;
+    overflow-y: auto;
+    min-height: 200px;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: absolute;
+    bottom: 0;
+}
+
+#completed-order::after{
+    content: 'Completed Orders';
+    position: absolute;
+}
+
+/*
+#menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: white;
+    width: 100%;
+    height: 45px;
+    border-bottom: 1px solid rgba(0,0,0,.18);
+    border-top: 1px solid rgba(0,0,0,.18);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 5%);
+    overflow-x:auto;
+}
+
+#category{
+    display: inline-block;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50vw;
+}
+
+#dish-container{
+    display: flex;
+    justify-content: space-evenly;
+    height: calc(100% - 127px);
+    width: 100%;
+    overflow-y: auto;
+}
+
+#dish-container div{
+    padding:30px
+}
+
+#company-name::after{
+    content:'';
+    background-image:url('Image/hamburger-menu.png');
+    background-size: 80px;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    right: -80px;
+    top: 0;
+    color:black;
+}
+*/
+
+#menu{
+    position: fixed;
+    top:80px;
+    height: calc(100% - 80px);
+    overflow-y: auto;
+    width: 100px;
+    background-color: #2e383f;
+    color:white;
+}
+
+.selected-link{
+    background-color: rgb(0, 94, 113);
+    color:white
+}
+
+#menu a{
+    text-decoration: none;
+    color:white;
+}
+
+#category{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#category:hover{
+    background-color: rgb(0, 94, 113);
+    color:white
+}
+
+#dish-container{
+    margin-top:80px;
+    margin-left:110px;
+}
+
+#dish{
+    border:1px #2e383f solid;
+    border-radius: 10px;
+    width: width(100% - 60px);
+    margin:20px;
+    padding:10px;
+}
+
+#dish #info{
+    float:right;
+}
+
+#dish img{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+#dish #price{
+    color: #ff495e;
+    font-weight: 700;
+    font-size: 25px;
+} 
+
+#dish h2{
+    max-width: 120px;
+    margin:0;
+    margin-bottom:22px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.btn{
+    display: inline-flex;
+    font-weight:500;
+    font-size: 1.5rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+}
+
+.circle{
+    margin:0px;
+    padding:0px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border:1px #2e383f solid;
+}
+
+.btn.circle#plus{
+    background: #DE5867;
+    color: white;
+    border-color: #DE5867;
+}
+
+.btn.circle#minus{
+    visibility: hidden;
+    user-select: none;
+}
+
+.btn#clear-basket{
+    float:left;
+    color:white;
+    background-color: red;
+    font-weight: 400;
+    font-size: 1.3rem;
+    margin:10px;
+}
+
+.btn#order{
+    float:right;
+    color:white;
+    background-color: #007bff;
+    font-weight: 400;
+    font-size: 1.3rem;
+    margin:10px;
+}
+
+.btn.circle#close{
+    float:right;
+    margin-top:-10px;
+    margin-right:10px;
+    background-color: #DE5867;
+    border-color: #DE5867;
+    color: white;
+}
+
+#quantity{
+    color:black;
+    margin: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    #company-name{
+        display: none;
+    }
+    #dish{
+        margin:20px 2px;
+        padding:5px;
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    #dish #info{
+        float:inherit;
+    }
+}
