@@ -17,7 +17,8 @@ class Table(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=256)
     active = models.BooleanField(default=True)
-
+    priority = models.IntegerField(unique=True)
+    
     def __str__(self):
         return self.name
 

@@ -97,7 +97,8 @@ def orderFood(request):
         basket = Order.objects.get(pk=request.POST['basket_pk'])
         orderKitchen= OrderKitchen(table=basket.table)
         temp = ""
-        for x in basket.dishes_set.all():
+        #basket.dishes_set.all().order_by('dish__category__priority')  
+        for x in basket.dishes_set.all().order_by('dish__category__priority'):
             temp += f'<h3 style="font-weight:100;"><strong>{x.quantity} x</strong> {x.dish.name}</h3>'
         orderKitchen.dishes = f"""
             <h1>Table {basket.table.name}</h1>

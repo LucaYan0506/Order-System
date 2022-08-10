@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     
             const inner = document.createElement('div');
             inner.innerHTML = order.dishes;
-            inner.style.maxHeight = '220px';
+            inner.style.height = '260px';
             inner.style.overflowY = 'auto';
             div.append(inner);
             
