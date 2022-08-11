@@ -14,3 +14,18 @@ from django.core.asgi import get_asgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Order_System.settings')
 
 application = get_asgi_application()
+
+
+#setting for channels
+from channels.auth import AuthMiddlewareStack
+from channels.routing import ProtocolTypeRouter, URLRouter
+
+import Chef.routing
+
+application = ProtocolTypeRouter({
+    "websocket": AuthMiddlewareStack(
+        URLRouter(
+            Chef.routing.websocket_urlpatterns,
+        )
+    ),
+})

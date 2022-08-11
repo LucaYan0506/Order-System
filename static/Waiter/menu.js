@@ -1,5 +1,6 @@
 var prev_link;
 var root = document.querySelector(':root');
+const socket = new WebSocket(`ws://${window.location.host}/ws/chat/`);
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#category').className += "selected-link";
@@ -29,6 +30,11 @@ function update_basket(dish_pk, n){
         body: data,
         credentials: 'same-origin',
     })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result['totPrice'])
+        document.querySelector('span.total#price').innerHTML = result['totPrice'];
+    })
 }
 
 document.querySelectorAll('.btn.circle#plus').forEach(button => {
@@ -39,7 +45,6 @@ document.querySelectorAll('.btn.circle#plus').forEach(button => {
         update_basket(button.parentElement.dataset['dish_pk'],n)
         let value  = `"${parseInt(getComputedStyle(root).getPropertyValue('--basket-number-items').replaceAll('"','').replaceAll(' ', '')) + 1}"`
         root.style.setProperty('--basket-number-items',value);
-
 
         const minus = button.parentElement.querySelector('.btn.circle#minus');
         minus.style.visibility = 'inherit';
@@ -147,9 +152,19 @@ function orderBasket(pk){
         body: data,
         credentials: 'same-origin',
     })
-    .then(
-        setTimeout(()=>{
-            location.reload()
-        },500)
-    )
+    .then(response => response.json())
+    .then(data => {
+        if (data.result == 'Error'){
+            alert('Your basket is empty.');
+        }else{
+            socket.send(JSON.stringify({
+                'order':{
+                    'dishes':data.dishes,
+                    'pk':data.pk,
+                    'status':data.status,
+                },
+            }))
+        }
+        location.reload()
+    })
 }

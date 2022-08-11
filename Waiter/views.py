@@ -83,6 +83,14 @@ def updatebasket(request):
         elif int(data['n']) > 0:
             dishes = Dishes(order=order,dish=dish,quantity=data['n'])
             dishes.save()
+
+        totPrice = 0
+
+        for dishes in order.dishes_set.all():
+            totPrice += dishes.quantity * dishes.dish.price
+        return JsonResponse({
+            'totPrice':totPrice
+        },safe=False)
     return HttpResponse('You are in the wrong page')
 
 def clearBasket(request):
@@ -97,7 +105,12 @@ def orderFood(request):
         basket = Order.objects.get(pk=request.POST['basket_pk'])
         orderKitchen= OrderKitchen(table=basket.table)
         temp = ""
-        #basket.dishes_set.all().order_by('dish__category__priority')  
+        if basket.dishes_set.all().count() == 0:
+            basket.delete()
+            return JsonResponse({
+                'result':'Error',
+            },safe=False)
+            
         for x in basket.dishes_set.all().order_by('dish__category__priority'):
             temp += f'<h3 style="font-weight:100;"><strong>{x.quantity} x</strong> {x.dish.name}</h3>'
         orderKitchen.dishes = f"""
@@ -122,6 +135,11 @@ def orderFood(request):
         else:
             basket.ordered = True
             basket.save()
-        return JsonResponse({'message':'success'},safe=False)
+        return JsonResponse({
+            'result':'Success',
+            'pk':orderKitchen.pk,
+            'dishes':orderKitchen.dishes,
+            'status':orderKitchen.status
+            },safe=False)
 
     return HttpResponse('You are in the wrong page')

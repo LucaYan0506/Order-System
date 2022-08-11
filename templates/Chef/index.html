@@ -7,11 +7,11 @@
     <title>Italian Truffle Restaurant</title>
 </head>
 <body>
-    <!--
-    <h1 style="background-color: rgb(78 198 223);text-align:center;color:white;padding:20px">
-        Italian Truffle Restaurant
-    </h1>
-    -->
+    {% csrf_token %}
+    <a href={% url 'logout' %} class="btn" style="background:#37b3e9; color:white; font-size:1.3em">Logout</a>
+    <div id='order-container'>
+
+    </div>
     <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
     <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
     <script type="text/javascript" src="{% static "Chef/index.js" %}"></script>
