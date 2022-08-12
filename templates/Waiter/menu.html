@@ -1,5 +1,4 @@
 {% load static %}
-{% get_media_prefix %}
 
 <html lang="en">
 <head>
@@ -12,9 +11,9 @@
 <body>
     <div id="nav">
         <div id="company-name">
-            Italian Truffle <br> Restaurant
+            Table {{table.name}}
         </div>
-        <h1 style="text-align: center; width:calc(100% - 80px)">Table {{table.name}}</h1>
+        <h1 style="text-align: center; width:calc(100% - 80px)">Italian Truffle Restaurant</h1>
         <div id="basket-container" style="position:relative; right:0;top:0;margin:10px 0px;cursor:pointer">
             <img src="{%static 'Waiter/Image/basket.png' %}" id="basket" alt="basket">Basket
         </div>
@@ -63,9 +62,9 @@
             <h2 class="category" id="{{category.name}}">{{category.name}}</h2>
             {% for dish in category.dishes %}
                 <div id="dish">
-                    <img src="/media/{{dish.image}}" alt="img">
+                    <h2>{{dish.name}}</h2>
+                    <img src="/media/{{dish.image}}"  alt="img"><!--<span>{{dish.description}}</span>-->
                     <div id="info">
-                        <h2>{{dish.name}}</h2>
                         <span id="price">£{{dish.price}} 
                             <div style="display: inline-block;" data-quantity="{{dish.quantity}}" data-dish_pk="{{dish.pk}}">
                                 <button class="btn circle" id="minus" style="user-select:inherit;visibility:inherit">–</button>
@@ -90,12 +89,14 @@
             {% if basket %}
                 {% for dishes in basket.dishes_set.all %}
                 <div id="dish">
+                    <h2>{{dishes.dish.name}}</h2>
                     <img src="/media/{{dishes.dish.image}}" alt="img">
                     <div id="info">
-                        <h2>{{dishes.dish.name}}</h2>
                         <span id="price">£{{dishes.dish.price}} 
-                            <div style="display: inline-block;" data-quantity="{{dishes.quantity}}" data-dish_pk="{{dishes.dish.pk}}">
-                                <button class="btn circle" id="minus" style="user-select:inherit;visibility:inherit">–</button><span id="quantity">{{dishes.quantity}}</span><button class="btn circle" id="plus">+</button>
+                            <div style="display: inline-block;" data-quantity="{{dish.quantity}}" data-dish_pk="{{dish.pk}}">
+                                <button class="btn circle" id="minus" style="user-select:inherit;visibility:inherit">–</button>
+                                <span id="quantity">{{dishes.quantity}}</span>
+                                <button class="btn circle" id="plus">+</button>
                             </div>
                         </span>
                     </div>
@@ -103,10 +104,9 @@
                 </div>
                 {% endfor %}  
                     <div id="dish">
+                        <h2>Total</h2>
                         <div id="info">
-                            <h2>Total</h2>
-                            <span class="total" id="price">£{{basket_price|floatformat:2}}
-                            </span>
+                            <span class="total" id="price">£{{basket_price|floatformat:2}}</span>
                         </div>
                         <div style="clear:both"></div>
                     </div>  
@@ -114,8 +114,8 @@
                     <button class="btn" id="order" onclick="orderBasket({{basket.pk}})">Order</button>
                 {% else %}
                     <div id="dish">
+                        <h2>Total</h2>
                         <div id="info">
-                            <h2>Total</h2>
                             <span class="total" id="price">£0.00
                             </span>
                         </div>
@@ -135,9 +135,9 @@
             {% if order %}
                 {% for dishes in order.dishes_set.all %}
                 <div id="dish">
+                    <h2>{{dishes.dish.name}}</h2>
                     <img src="/media/{{dishes.dish.image}}" alt="img">
                     <div id="info">
-                        <h2>{{dishes.dish.name}}</h2>
                         <span id="price">£{{dishes.dish.price}} 
                             <div style="display: inline-block;" data-quantity="{{dishes.quantity}}" data-dish_pk="{{dishes.dish.pk}}">
                                 <span id="quantity"> x {{dishes.quantity}}</span>
@@ -148,8 +148,8 @@
                 </div>
                 {% endfor %}    
                 <div id="dish">
+                    <h2>Total</h2>
                     <div id="info">
-                        <h2>Total</h2>
                         <span id="price">£{{order_price|floatformat:2}}
                         </span>
                     </div>

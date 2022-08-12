@@ -95,6 +95,7 @@ document.querySelector('#basket-page-container').onclick = (e) => {
 }
 
 function openBasket(){
+    document.querySelector('body').style.overflow = 'hidden';
     document.querySelector('#basket-page-container').style.top = "0"
 }
 
@@ -112,6 +113,7 @@ document.querySelector('#order-page-container').onclick = (e) => {
 }
 
 function openOrder(){
+    document.querySelector('body').style.overflow = 'hidden';
     document.querySelector('#order-page-container').style.top = "0"
 }
 

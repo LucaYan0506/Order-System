@@ -1,0 +1,105 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'Waiter/selectTable.css' %}">
+    <title>Italian Truffle Restaurant</title>
+    <style>
+        #msgbox-container{
+            display: none;
+            justify-content: center;
+            align-items:center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 100;
+        }
+        #msgbox{
+            display: flex;
+            justify-content: center;
+            align-items:center;
+            width:500px;
+            height:250px;
+            font-size: 2rem;
+            background:#fff;
+            position:relative;
+        }
+        .btn#cancel{
+            background:red;
+            color:white;
+        }
+        .btn#pay{
+            background:green;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <div id="msgbox-container">
+        <div id="msgbox">
+            <button class="btn" id="cancel-x" style="background:red;color:white;position:absolute;top:10px;right:10px">X</button>
+            
+            <div id="content">
+            </div>
+
+            <div style="position:absolute;left:0;bottom:0; width:calc(100% - 20px);padding:10px;">
+                <button class="btn" style="float:left;" id="cancel">Cancel</button>
+                <button class="btn" style="float:right;" id="pay">Pay</button>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+    {% csrf_token %}
+    <div id="table-container" style="height:100%;position:relative">
+        <a href={% url 'logout' %} class="btn" style="background:#37b3e9; color:white; font-size:1.3em;position:absolute;left:10px;top:20px">Logout</a>
+
+        <h1 style="text-align:center">Table manager</h1>
+        {% for table in tables %}
+            {% if table.order %}
+                <div id="table-{{table.pk}}" onclick="pay({{table.order.pk}},{{table.tot_price}})" style='background:#FFBF00;color:#FFF;cursor:pointer'>{{table.name}}</div>
+            {% else %}
+                <div id="table-{{table.pk}}">{{table.name}}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <script>
+        function pay(pk,totCost){
+            document.querySelector('#msgbox-container').style.display= 'flex';
+            document.querySelector('#msgbox-container #content').innerHTML = 'The total price is £' + totCost;
+
+
+            document.querySelector('.btn#cancel').onclick = () => {
+                document.querySelector('#msgbox-container').style.display= '';
+            };
+            document.querySelector('.btn#cancel-x').onclick = () => {
+                document.querySelector('#msgbox-container').style.display= '';
+            };
+            document.querySelector('.btn#pay').onclick = () => {
+                const data = new FormData();
+                data.append('pk',pk)
+                data.append('csrfmiddlewaretoken', document.querySelector('input[name="csrfmiddlewaretoken"]').value);
+                
+                fetch('/pay/',{
+                    method: 'POST',
+                    header: {  
+                        'Content-Type': "multipart/form-data",
+                }, 
+                    body: data,
+                    credentials: 'same-origin',
+                })
+                .then(
+                    setTimeout(()=>{
+                        location.reload()
+                    },500)
+                )
+
+            };
+        }
+    </script>
+</body>
+</html>

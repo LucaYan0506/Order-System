@@ -35,6 +35,7 @@ def menuView(request):
                     'pk':dish.pk,
                     'name':dish.name,
                     'image':dish.image,
+                    'description':dish.description,
                     'price':dish.price,
                     'quantity':quantity,
                 }

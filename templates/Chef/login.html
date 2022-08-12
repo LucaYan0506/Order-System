@@ -30,6 +30,9 @@
         <form action="{% url 'login' %}" method="post">
             <input id="url" name="url" type="hidden" value="{{url}}">
             {% csrf_token %}
+            {% if link %}
+            <input type="hidden" name="link" id="id_link" value="{{link}}">
+            {% endif %}
             <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input id="username" name="username" type="text" class="form-control" placeholder="Enter username">
