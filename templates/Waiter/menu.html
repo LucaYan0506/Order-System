@@ -63,7 +63,7 @@
             {% for dish in category.dishes %}
                 <div id="dish">
                     <h2>{{dish.name}}</h2>
-                    <img src="/media/{{dish.image}}"  alt="img"><!--<span>{{dish.description}}</span>-->
+                    <img src="/media/{{dish.image}}"  alt="img"><span>{{dish.description}}</span>
                     <div id="info">
                         <span id="price">£{{dish.price}} 
                             <div style="display: inline-block;" data-quantity="{{dish.quantity}}" data-dish_pk="{{dish.pk}}">
