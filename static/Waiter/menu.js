@@ -1,6 +1,6 @@
 var prev_link;
 var root = document.querySelector(':root');
-const socket = new WebSocket(`ws://${window.location.host}:8000/ws/chat/`);
+const socket = new WebSocket(`ws://${window.location.host}:8001/ws/chat/`);
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#category').className += "selected-link";
