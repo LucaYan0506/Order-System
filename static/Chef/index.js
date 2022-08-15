@@ -15,7 +15,7 @@ async function mutipleBeep(times) {
     }
 }
 
-const socket = new WebSocket(`ws://${window.location.host}/ws/chat/`);
+const socket = new WebSocket(`ws://${window.location.hostname}:8001/ws/chat/`);
 socket.onmessage = (event) => {
     receive_message(event);
 }
