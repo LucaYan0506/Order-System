@@ -20,19 +20,3 @@ from channels.routing import get_default_application
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", f'{config("PROJECT_NAME")}.settings')
 django.setup()
 application = get_default_application()
-
-
-
-#setting for channels
-from channels.auth import AuthMiddlewareStack
-from channels.routing import ProtocolTypeRouter, URLRouter
-
-import Chef.routing
-
-application = ProtocolTypeRouter({
-    "websocket": AuthMiddlewareStack(
-        URLRouter(
-            Chef.routing.websocket_urlpatterns,
-        )
-    ),
-})
