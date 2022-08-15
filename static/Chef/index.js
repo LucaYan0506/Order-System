@@ -14,7 +14,7 @@ async function mutipleBeep(times) {
     }
 }
 
-const startSound = document.createElement('button')
+const startSound = document.querySelector('#enable-button')
 startSound.onclick = () => {
     mutipleBeep(4);
 }

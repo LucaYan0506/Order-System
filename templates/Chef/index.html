@@ -9,6 +9,7 @@
 <body>
     {% csrf_token %}
     <a href={% url 'logout' %} class="btn" style="background:#37b3e9; color:white; font-size:1.3em">Logout</a>
+    <button class="btn" style="background:green; color:white; font-size:1.3em" id="enable-button">Enable sound</button>
     <div id='order-container'>
 
     </div>
