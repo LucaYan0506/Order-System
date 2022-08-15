@@ -112,8 +112,17 @@ def orderFood(request):
                 'result':'Error',
             },safe=False)
             
+        all_together = False
+        if 'all_together' in request.POST:
+            all_together = True
+
+        prev = None
         for x in basket.dishes_set.all().order_by('dish__category__priority'):
             temp += f'<h3 style="font-weight:100;"><strong>{x.quantity} x</strong> {x.dish.name}</h3>'
+            if x.dish.category != prev and all_together == False:
+                temp+='<hr>'
+            prev = x.dish.category
+
         orderKitchen.dishes = f"""
             <h1>Table {basket.table.name}</h1>
             {temp}

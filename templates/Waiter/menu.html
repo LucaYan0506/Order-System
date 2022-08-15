@@ -110,6 +110,10 @@
                         </div>
                         <div style="clear:both"></div>
                     </div>  
+                    <div style="margin:15px">
+                        <label for="all_together" style="font-size: 20px;">All together</label>
+                        <input type="checkbox" id="all_together">
+                    </div>
                     <button class="btn" id="clear-basket" onclick="clearBasket({{basket.pk}})">Clear basket</button>
                     <button class="btn" id="order" onclick="orderBasket({{basket.pk}})">Order</button>
                 {% else %}
@@ -121,6 +125,10 @@
                         </div>
                         <div style="clear:both"></div>
                     </div>    
+                    <div style="margin:15px">
+                        <label for="all_together" style="font-size: 20px;">All together</label>
+                        <input type="checkbox" id="all_together">
+                    </div>
                     <button class="btn" id="clear-basket" onclick="alert('Your basket is empty.')">Clear basket</button>
                     <button class="btn" id="order" onclick="alert('Your basket is empty.')">Order</button> 
             {% endif %}
@@ -167,8 +175,5 @@
         {% endif %}
     </script>
     <script src="{% static 'Waiter/menu.js' %}"></script>
-    <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -41,6 +41,9 @@ class Order(models.Model):
     #if it's paid, it should be archived 
     paid = models.BooleanField()
 
+    #actually price
+    actually_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    
 class Dishes(models.Model):
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
     quantity = models.IntegerField()
