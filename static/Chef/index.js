@@ -1,5 +1,5 @@
   
-const socket = new WebSocket(`ws://${window.location.host}:8001/ws/chat/`);
+const socket = new WebSocket(`ws://${window.location.hostname}:8001/ws/chat/`);
 socket.onmessage = (event) => {
     var data = JSON.parse(event.data);
     const div = document.createElement('div');
