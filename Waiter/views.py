@@ -12,6 +12,7 @@ def selectTableView(request):
 
 def menuView(request):
     if request.user.is_authenticated:
+
         if request.GET.get('table'):
             table = Table.objects.get(pk = request.GET.get('table')) 
             categories = Category.objects.filter(active=True)
@@ -52,23 +53,24 @@ def menuView(request):
                     'name':category.name,
                     'dishes':dishes
                 })
-        return HttpResponseRedirect("/login/?link=index")
 
-        if Order.objects.filter(table=table, ordered=True, paid=False).exists():
-            order = Order.objects.filter(table=table, ordered=True, paid=False).first()
-            for dishes in order.dishes_set.all():
-                order_price += dishes.dish.price * dishes.quantity
+            if Order.objects.filter(table=table, ordered=True, paid=False).exists():
+                order = Order.objects.filter(table=table, ordered=True, paid=False).first()
+                for dishes in order.dishes_set.all():
+                    order_price += dishes.dish.price * dishes.quantity
 
-        return render(request,'Waiter/menu.html', {
-            'table': table,
-            'categories': custom_categories,
-            'basket':basket,
-            'tot_basket':tot_basket,
-            'basket_price':basket_price,
-            'order':order,
-            'order_price':order_price,
-        })
-    return HttpResponse('You are in the wrong page')
+            return render(request,'Waiter/menu.html', {
+                'table': table,
+                'categories': custom_categories,
+                'basket':basket,
+                'tot_basket':tot_basket,
+                'basket_price':basket_price,
+                'order':order,
+                'order_price':order_price,
+            })
+        return HttpResponse('You are in the wrong page')
+        
+    return HttpResponseRedirect("/login/?link=index")
 
 
 def updatebasket(request):
