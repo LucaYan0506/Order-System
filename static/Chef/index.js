@@ -134,3 +134,10 @@ function completeOrder(button){
         order.parentElement.removeChild(order);
     }, 500);
 }
+
+function line(elem){
+    if (elem.style.textDecoration == 'line-through')
+        elem.style.textDecoration = ''
+    else
+        elem.style.textDecoration = 'line-through'
+}

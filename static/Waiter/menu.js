@@ -19,6 +19,7 @@ function update_basket(dish_pk, n){
     const data = new FormData();
     data.append('table_pk',table_pk)
     data.append('dish_pk',dish_pk)
+    data.append('n_people',document.querySelector('input#n_people'));
     data.append('n',n)
     data.append('csrfmiddlewaretoken', document.querySelector('input[name="csrfmiddlewaretoken"]').value);
 
@@ -145,6 +146,10 @@ function orderBasket(pk){
     const data = new FormData;
     data.append('csrfmiddlewaretoken', document.querySelector('input[name="csrfmiddlewaretoken"]').value);
     data.append('basket_pk',pk);
+    if (document.querySelector('input#n_people').value == 0)
+        return alert('Enter the number of people')
+    else
+        data.append('n_people',document.querySelector('input#n_people').value);
     if (document.querySelector('#all_together').checked)
         data.append('all_together',true);
         
