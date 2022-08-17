@@ -39,6 +39,11 @@
                     <h2>{{dish.name}}</h2>
                     <div id="info">
                         <span id="price">£{{dish.price}} 
+                            <div style="display: inline-block;" data-quantity="{{dish.quantity}}" data-dish_pk="{{dish.pk}}">
+                                <button class="btn circle" id="minus" style="user-select:inherit;visibility:inherit">–</button>
+                                <span id="quantity">{{dish.quantity}}</span>
+                                <button class="btn circle" id="plus">+</button>
+                            </div>
                         </span>
                     </div>
                     <div style="clear:both"></div>
@@ -121,13 +126,13 @@
                     <div style="clear:both"></div>
                 </div>
                 {% endfor %}    
-                <div id="dish">
+                <div id="dish" style="margin-bottom:100px;">
                     <h2>Total</h2>
                     <div id="info">
                         <span id="price">£{{order_price|floatformat:2}}
                         </span>
                     </div>
-                    <div style="clear:both"></div>
+                    <div style="clear:both;"></div>
                 </div>
             {% endif %}
         </div>

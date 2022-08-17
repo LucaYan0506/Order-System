@@ -1,0 +1,41 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'Waiter/menu.css' %}">
+    <title>Italian Truffle Restaurant</title>
+</head>
+<body>
+    <div id="nav">
+        <h1 style="text-align: center; width:calc(100% - 80px)">Italian Truffle Restaurant</h1>
+    </div>
+
+    <div id="menu">
+        {% for category in categories %}
+        <a href="#{{category.name}}">
+            <div id="category" name="{{category.name}}">{{category.name}}</div>
+        </a>
+        {% endfor %}
+    </div>
+
+    <div id="dish-container">
+        {% for category in categories %}
+            <h2 class="category" id="{{category.name}}">{{category.name}}</h2>
+            {% for dish in category.dishes %}
+                <div id="dish">
+                    <h2>{{dish.name}}</h2>
+                    <img src="{{dish.image.url}}"  alt="img"><span>{{dish.description}}</span>
+                    <div id="info">
+                        <span id="price">£{{dish.price}} 
+                        </span>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</body>
+</html>
