@@ -116,6 +116,7 @@ def payOrder(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             order = Order.objects.get(pk = request.POST['pk'])
+            order.actually_price = request.POST['actual_price']
             order.paid = True
             order.save()
             return JsonResponse({'message':'success'},safe=False)

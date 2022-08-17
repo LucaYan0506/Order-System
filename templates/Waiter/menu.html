@@ -22,32 +22,6 @@
         </div>
     </div>
 
-    <!--
-    <div id="menu">
-         <div id="company-name">
-            Italian Truffle <br> Restaurant
-        </div>
-        {% for category in categories %}
-            <div id="category">{{category.name}}</div>
-        {% endfor %}
-    </div>
-
-
-               {% for folder in folders%}
-            <h3 style="margin:25px 0 10px 25px" id="{{folder.name}}">{{folder.name}}</h2>
-            
-                {% for image in folder.image_set.all %}
-                <div data-selected="false" data-image_pk="{{image.pk}}">
-                    <figure>
-                        <img src="{{image.image.url}}"/>
-                        <span>{{image.image.name}}</span>
-                    </figure>
-                    <button class="btn" id="delete" onclick="deleteImage({{image.pk}})">Delete</button>
-                </div>
-                {% endfor %}
-            {% endfor%} 
--->
-
     <div id="menu">
         {% for category in categories %}
         <a href="#{{category.name}}">
@@ -63,14 +37,8 @@
             {% for dish in category.dishes %}
                 <div id="dish">
                     <h2>{{dish.name}}</h2>
-                    <img src="/media/{{dish.image}}"  alt="img"><span>{{dish.description}}</span>
                     <div id="info">
                         <span id="price">£{{dish.price}} 
-                            <div style="display: inline-block;" data-quantity="{{dish.quantity}}" data-dish_pk="{{dish.pk}}">
-                                <button class="btn circle" id="minus" style="user-select:inherit;visibility:inherit">–</button>
-                                <span id="quantity">{{dish.quantity}}</span>
-                                <button class="btn circle" id="plus">+</button>
-                            </div>
                         </span>
                     </div>
                     <div style="clear:both"></div>
@@ -90,7 +58,6 @@
                 {% for dishes in basket.dishes_set.all %}
                 <div id="dish">
                     <h2>{{dishes.dish.name}}</h2>
-                    <img src="/media/{{dishes.dish.image}}" alt="img">
                     <div id="info">
                         <span id="price">£{{dishes.dish.price}} 
                             <div style="display: inline-block;" data-quantity="{{dish.quantity}}" data-dish_pk="{{dish.pk}}">
@@ -110,6 +77,10 @@
                         </div>
                         <div style="clear:both"></div>
                     </div>  
+                    <div style="margin:15px">
+                        <label for="all_together" style="font-size: 20px;">All together</label>
+                        <input type="checkbox" id="all_together">
+                    </div>
                     <button class="btn" id="clear-basket" onclick="clearBasket({{basket.pk}})">Clear basket</button>
                     <button class="btn" id="order" onclick="orderBasket({{basket.pk}})">Order</button>
                 {% else %}
@@ -121,6 +92,10 @@
                         </div>
                         <div style="clear:both"></div>
                     </div>    
+                    <div style="margin:15px">
+                        <label for="all_together" style="font-size: 20px;">All together</label>
+                        <input type="checkbox" id="all_together">
+                    </div>
                     <button class="btn" id="clear-basket" onclick="alert('Your basket is empty.')">Clear basket</button>
                     <button class="btn" id="order" onclick="alert('Your basket is empty.')">Order</button> 
             {% endif %}
@@ -136,7 +111,6 @@
                 {% for dishes in order.dishes_set.all %}
                 <div id="dish">
                     <h2>{{dishes.dish.name}}</h2>
-                    <img src="/media/{{dishes.dish.image}}" alt="img">
                     <div id="info">
                         <span id="price">£{{dishes.dish.price}} 
                             <div style="display: inline-block;" data-quantity="{{dishes.quantity}}" data-dish_pk="{{dishes.dish.pk}}">

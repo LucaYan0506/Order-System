@@ -43,7 +43,11 @@
         <div id="msgbox">
             <button class="btn" id="cancel-x" style="background:red;color:white;position:absolute;top:10px;right:10px">X</button>
             
-            <div id="content">
+            <div>
+                <div id="content">
+                </div>    
+                
+                The actual price is £<input id="actual_price" style=" font-size:1rem;padding-bottom: 5px;padding-top: 10px;" type="text">
             </div>
 
             <div style="position:absolute;left:0;bottom:0; width:calc(100% - 20px);padding:10px;">
@@ -71,6 +75,7 @@
         function pay(pk,totCost){
             document.querySelector('#msgbox-container').style.display= 'flex';
             document.querySelector('#msgbox-container #content').innerHTML = 'The total price is £' + totCost;
+            document.querySelector('#msgbox-container #actual_price').value = totCost;
 
 
             document.querySelector('.btn#cancel').onclick = () => {
@@ -83,6 +88,8 @@
                 const data = new FormData();
                 data.append('pk',pk)
                 data.append('csrfmiddlewaretoken', document.querySelector('input[name="csrfmiddlewaretoken"]').value);
+                let actual_price = document.querySelector('#actual_price').value;
+                data.append('actual_price', actual_price);
                 
                 fetch('/pay/',{
                     method: 'POST',

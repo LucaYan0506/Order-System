@@ -145,6 +145,8 @@ function orderBasket(pk){
     const data = new FormData;
     data.append('csrfmiddlewaretoken', document.querySelector('input[name="csrfmiddlewaretoken"]').value);
     data.append('basket_pk',pk);
+    if (document.querySelector('#all_together').checked)
+        data.append('all_together',true);
 
     fetch('/order/',{
         method: 'POST',
