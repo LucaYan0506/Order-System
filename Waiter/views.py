@@ -136,11 +136,13 @@ def orderFood(request):
                 all_together = True
 
             prev = None
+            first = True
             for x in basket.dishes_set.all().order_by('dish__category__priority'):
-                temp += f'<h3 style="font-weight:100;"><strong>{x.quantity} x</strong> {x.dish.name}</h3>'
-                if x.dish.category != prev and all_together == False:
+                if x.dish.category != prev and all_together == False and first == False:
                     temp+='<hr>'
+                temp += f'<h3 style="font-weight:100;"><strong>{x.quantity} x</strong> {x.dish.name}</h3>'
                 prev = x.dish.category
+                first = False
 
             orderKitchen.dishes = f"""
                 <h1>Table {basket.table.name}</h1>

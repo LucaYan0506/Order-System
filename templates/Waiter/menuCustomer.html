@@ -27,7 +27,12 @@
             {% for dish in category.dishes %}
                 <div id="dish">
                     <h2>{{dish.name}}</h2>
-                    <img src="{{dish.image.url}}"  alt="img"><span>{{dish.description}}</span>
+                    {% if dish.image %}
+                        <img src="{{dish.image.url}}"  alt="img">
+                    {% else %}
+                        <img src=""  alt="img">
+                    {% endif %}
+                    <span>{{dish.description}}</span>
                     <div id="info">
                         <span id="price">£{{dish.price}} 
                         </span>
