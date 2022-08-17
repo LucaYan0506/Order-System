@@ -24,13 +24,11 @@ socket.onmessage = (event) => {
     startSound.click();
     var data = JSON.parse(event.data);
     const div = document.createElement('div');
-    div.style.height = '300px';
-    div.style.width = '200px';
     div.className = 'container'
 
     const inner = document.createElement('div');
     inner.innerHTML = data['order']['dishes'];
-    inner.style.height = '260px';
+    inner.style.paddingBottom = '50px';
     inner.style.overflowY = 'auto';
     div.append(inner);
 
@@ -60,13 +58,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     .then(result => {
         result.orders.forEach(order => {
             const div = document.createElement('div');
-            div.style.height = '300px';
-            div.style.width = '200px';
             div.className = 'container'
     
             const inner = document.createElement('div');
             inner.innerHTML = order.dishes;
-            inner.style.height = '260px';
+            inner.style.paddingBottom = '50px';
             inner.style.overflowY = 'auto';
             div.append(inner);
             
