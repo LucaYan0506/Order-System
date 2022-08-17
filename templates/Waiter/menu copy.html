@@ -37,8 +37,14 @@
             {% for dish in category.dishes %}
                 <div id="dish">
                     <h2>{{dish.name}}</h2>
+                    <img src="{{dish.image}}"  alt="img"><span>{{dish.description}}</span>
                     <div id="info">
                         <span id="price">£{{dish.price}} 
+                            <div style="display: inline-block;" data-quantity="{{dish.quantity}}" data-dish_pk="{{dish.pk}}">
+                                <button class="btn circle" id="minus" style="user-select:inherit;visibility:inherit">–</button>
+                                <span id="quantity">{{dish.quantity}}</span>
+                                <button class="btn circle" id="plus">+</button>
+                            </div>
                         </span>
                     </div>
                     <div style="clear:both"></div>
@@ -58,6 +64,7 @@
                 {% for dishes in basket.dishes_set.all %}
                 <div id="dish">
                     <h2>{{dishes.dish.name}}</h2>
+                    <img src="{{dishes.dish.image.url}}" alt="img">
                     <div id="info">
                         <span id="price">£{{dishes.dish.price}} 
                             <div style="display: inline-block;" data-quantity="{{dish.quantity}}" data-dish_pk="{{dish.pk}}">
@@ -111,6 +118,7 @@
                 {% for dishes in order.dishes_set.all %}
                 <div id="dish">
                     <h2>{{dishes.dish.name}}</h2>
+                    <img src="{{dishes.dish.image.url}}" alt="img">
                     <div id="info">
                         <span id="price">£{{dishes.dish.price}} 
                             <div style="display: inline-block;" data-quantity="{{dishes.quantity}}" data-dish_pk="{{dishes.dish.pk}}">
