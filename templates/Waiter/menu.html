@@ -39,6 +39,11 @@
                     <h2>{{dish.name}}</h2>
                     <div id="info">
                         <span id="price">£{{dish.price}} 
+                            <div style="display: inline-block;" data-quantity="{{dish.quantity}}" data-dish_pk="{{dish.pk}}">
+                                <button class="btn circle" id="minus" style="user-select:inherit;visibility:inherit">–</button>
+                                <span id="quantity">{{dish.quantity}}</span>
+                                <button class="btn circle" id="plus">+</button>
+                            </div>
                         </span>
                     </div>
                     <div style="clear:both"></div>
@@ -60,7 +65,7 @@
                     <h2>{{dishes.dish.name}}</h2>
                     <div id="info">
                         <span id="price">£{{dishes.dish.price}} 
-                            <div style="display: inline-block;" data-quantity="{{dish.quantity}}" data-dish_pk="{{dish.pk}}">
+                            <div style="display: inline-block;" data-quantity="{{dishes.quantity}}" data-dish_pk="{{dishes.dish.pk}}">
                                 <button class="btn circle" id="minus" style="user-select:inherit;visibility:inherit">–</button>
                                 <span id="quantity">{{dishes.quantity}}</span>
                                 <button class="btn circle" id="plus">+</button>
@@ -79,7 +84,9 @@
                     </div>  
                     <div style="margin:15px">
                         <label for="all_together" style="font-size: 20px;">All together</label>
-                        <input type="checkbox" id="all_together">
+                        <input type="checkbox" id="all_together"><br>
+                        <label for="n_people" style="font-size: 20px;">Number of people</label>
+                        <input type="Number" name="n_people" id="n_people">
                     </div>
                     <button class="btn" id="clear-basket" onclick="clearBasket({{basket.pk}})">Clear basket</button>
                     <button class="btn" id="order" onclick="orderBasket({{basket.pk}})">Order</button>
@@ -92,10 +99,6 @@
                         </div>
                         <div style="clear:both"></div>
                     </div>    
-                    <div style="margin:15px">
-                        <label for="all_together" style="font-size: 20px;">All together</label>
-                        <input type="checkbox" id="all_together">
-                    </div>
                     <button class="btn" id="clear-basket" onclick="alert('Your basket is empty.')">Clear basket</button>
                     <button class="btn" id="order" onclick="alert('Your basket is empty.')">Order</button> 
             {% endif %}
@@ -121,13 +124,13 @@
                     <div style="clear:both"></div>
                 </div>
                 {% endfor %}    
-                <div id="dish">
+                <div id="dish" style="margin-bottom:100px;">
                     <h2>Total</h2>
                     <div id="info">
                         <span id="price">£{{order_price|floatformat:2}}
                         </span>
                     </div>
-                    <div style="clear:both"></div>
+                    <div style="clear:both;"></div>
                 </div>
             {% endif %}
         </div>

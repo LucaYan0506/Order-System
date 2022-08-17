@@ -115,6 +115,7 @@ def orderFood(request):
     if request.user.is_authenticated:
 
         if request.method == 'POST':
+            n_people = request.POST['n_people']
             basket = Order.objects.get(pk=request.POST['basket_pk'])
             orderKitchen= OrderKitchen(table=basket.table)
             temp = ""
@@ -130,13 +131,14 @@ def orderFood(request):
 
             prev = None
             for x in basket.dishes_set.all().order_by('dish__category__priority'):
-                temp += f'<h3 style="font-weight:100;"><strong>{x.quantity} x</strong> {x.dish.name}</h3>'
                 if x.dish.category != prev and all_together == False:
                     temp+='<hr>'
+                temp += f'<h3 onclick="line(this)" style="font-weight:100;"><strong>{x.quantity} x</strong> {x.dish.name}</h3>'
+
                 prev = x.dish.category
 
             orderKitchen.dishes = f"""
-                <h1>Table {basket.table.name}</h1>
+                <h1>{n_people}pp</h1>
                 {temp}
             """
             orderKitchen.save()
