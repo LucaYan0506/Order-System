@@ -85,6 +85,8 @@
                     <div style="margin:15px">
                         <label for="all_together" style="font-size: 20px;">All together</label>
                         <input type="checkbox" id="all_together">
+                        <label for="n_people" style="font-size: 20px;">Number of people</label>
+                        <input type="Number" id="n_people">
                     </div>
                     <button class="btn" id="clear-basket" onclick="clearBasket({{basket.pk}})">Clear basket</button>
                     <button class="btn" id="order" onclick="orderBasket({{basket.pk}})">Order</button>
@@ -100,8 +102,6 @@
                     <div style="margin:15px">
                         <label for="all_together" style="font-size: 20px;">All together</label>
                         <input type="checkbox" id="all_together">
-                        <label for="n_people" style="font-size: 20px;">Number of people</label>
-                        <input type="Number" id="n_people">
                     </div>
                     <button class="btn" id="clear-basket" onclick="alert('Your basket is empty.')">Clear basket</button>
                     <button class="btn" id="order" onclick="alert('Your basket is empty.')">Order</button> 
