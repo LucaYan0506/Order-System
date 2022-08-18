@@ -7,10 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'Waiter/menu.css' %}">
     <title>Italian Truffle Restaurant</title>
+    <style>
+        @media only screen and (max-width: 600px) {
+            #nav{
+                height:120px;
+            }
+            #menu{
+                top: 120px;
+                height: calc(100% - 120px);
+            }
+            #dish-container {
+                margin-top: 140px;
+            }
+            html{
+                scroll-padding-top:120px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="nav">
-        <h1 style="text-align: center; width:calc(100% - 80px)">Italian Truffle Restaurant</h1>
+        <h1 style="text-align: center; width:calc(100% - 80px);color:red">Italian Truffle Restaurant</h1>
     </div>
 
     <div id="menu">
