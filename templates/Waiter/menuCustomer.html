@@ -24,7 +24,7 @@
     <div id="dish-container">
         {% for category in categories %}
             <h2 class="category" id="{{category.name}}">{{category.name}}</h2>
-            {% for dish in category.dishes %}
+            {% for dish in category.dish_set.all %}
                 <div id="dish">
                     <h2>{{dish.name}}</h2>
                     {% if dish.image %}
