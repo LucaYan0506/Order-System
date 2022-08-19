@@ -19,7 +19,7 @@ startSound.onclick = () => {
     mutipleBeep(4);
 }
 
-const socket = new WebSocket(`ws://${window.location.hostname}:8001/ws/chat/`);
+const socket = new WebSocket(`wss://${window.location.hostname}:8001/ws/chat/`);
 socket.onmessage = (event) => {
     startSound.click();
     var data = JSON.parse(event.data);
