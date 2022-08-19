@@ -5,8 +5,8 @@ from .views import *
 
 
 urlpatterns = [
-    path('',selectTableView, name="index"),
-    path('menuCustomer/',menuCustomerView, name="menuCustomer"),
+    path('selectTable/',selectTableView, name="index"),
+    path('',menuCustomerView, name="menuCustomer"),
     path('menu/',menuView, name="menu"),
     path('basket/update/',updatebasket, name="updatebasket"),
     path('basket/clear/',clearBasket, name="clearBasket"),
