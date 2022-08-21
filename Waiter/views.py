@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from .models import *
+from .email import send_feedback_email,send_to_me
 
 # Create your views here.
 def selectTableView(request):
@@ -8,7 +9,7 @@ def selectTableView(request):
         return render(request,'Waiter/selectTable.html', {
             'tables': Table.objects.all()
         })
-    return HttpResponseRedirect("/login/?link=index")  
+    return HttpResponseRedirect("/login/?link=selectTable")  
 
 def menuView(request):
     if request.user.is_authenticated:
@@ -70,7 +71,7 @@ def menuView(request):
             })
         return HttpResponse('You are in the wrong page')
         
-    return HttpResponseRedirect("/login/?link=index")
+    return HttpResponseRedirect("/login/?link=selectTable")
 
 
 def updatebasket(request):
@@ -105,7 +106,7 @@ def updatebasket(request):
                 'totPrice':totPrice
             },safe=False)
         return HttpResponse('You are in the wrong page')
-    return HttpResponseRedirect("/login/?link=index")
+    return HttpResponseRedirect("/login/?link=selectTable")
 
 def clearBasket(request):
     if request.user.is_authenticated:
@@ -115,7 +116,7 @@ def clearBasket(request):
             return JsonResponse({'message':'success'},safe=False)
 
         return HttpResponse('You are in the wrong page')
-    return HttpResponseRedirect("/login/?link=index")
+    return HttpResponseRedirect("/login/?link=selectTable")
 
 
 def orderFood(request):
@@ -175,7 +176,7 @@ def orderFood(request):
                 },safe=False)
 
         return HttpResponse('You are in the wrong page')
-    return HttpResponseRedirect("/login/?link=index")
+    return HttpResponseRedirect("/login/?link=selectTable")
 
 def menuCustomerView(request):
     return render(request,'Waiter/menuCustomer.html',{
@@ -183,3 +184,23 @@ def menuCustomerView(request):
     })
 
     
+def indexView(request):
+    return render(request,'Waiter/index.html',{
+        'categories':Category.objects.filter(active=True)
+    })
+
+
+def send_message(request):
+    if request.method == "POST":
+        body = request.POST
+        name = body['name']
+        email = body['email']
+        subject = body['subject']
+        message = body['message']
+        newMessage = Message(mail=email, subject=subject, message=message)
+        newMessage.save()
+        send_feedback_email(email,name)
+        send_to_me(email, subject,message, name)
+        return JsonResponse("Message sent successfully, thank you for your message. I will reply as soon as possible (make sure that the email is correct, otherwise I cannot reply)",safe=False)
+        
+    return HttpResponse("Please, send a POST method")

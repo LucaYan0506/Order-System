@@ -177,3 +177,12 @@ DEFAULT_FROM_EMAIL = 'CodingWithMitch Team <noreply@codingwithmitch.com>'
 
 
 BASE_URL = "http://138.68.143.48"
+
+# gmail_send/settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'lucayanwork@gmail.com'
+EMAIL_HOST_PASSWORD = 'peumomelhoqrabgm'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'lucayanwork@gmail.com'

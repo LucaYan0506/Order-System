@@ -1,0 +1,6 @@
+You received a message from {{name | safe}} email: {{email | safe}}
+Here is a copy of the message:
+{{message | safe}}
+
+
+Thank you!

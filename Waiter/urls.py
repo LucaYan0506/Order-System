@@ -5,10 +5,12 @@ from .views import *
 
 
 urlpatterns = [
-    path('selectTable/',selectTableView, name="index"),
-    path('',menuCustomerView, name="menuCustomer"),
+    path('',indexView, name="index"),
+    path('selectTable/',selectTableView, name="selectTable"),
+    path('menuCustomer/',menuCustomerView, name="menuCustomer"),
     path('menu/',menuView, name="menu"),
     path('basket/update/',updatebasket, name="updatebasket"),
     path('basket/clear/',clearBasket, name="clearBasket"),
     path('order/',orderFood, name="orderFood"),
+    path('send_message/', send_message, name="send_message")
 ]
