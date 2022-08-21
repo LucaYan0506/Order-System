@@ -168,6 +168,13 @@ section#special-offer img{
     width: 60%;
 }
 
+#explore-more{
+    width: calc(60% - 20px);
+    margin:10px;
+    background-color: #1a4c1a;
+    font-size: 28px;
+}
+
 @media only screen and (max-width: 1100px) {
     :root{
         --margin-size: 10px;
@@ -194,6 +201,10 @@ section#special-offer img{
     section#special-offer img{
         width: 100%;
     }
+    #explore-more{
+        width: calc(100% - 20px);
+    }
+    
 }
 
 @media only screen and (max-width: 610px) {

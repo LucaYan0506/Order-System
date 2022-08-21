@@ -10,7 +10,7 @@
 </head>
 <body style="margin:0">
     <header>
-        <h1 id="left">Italian Truffle Restaurant</h1>
+        <h1 id="left" style="cursor:pointer;" onclick="window.location.href = '/'">Italian Truffle Restaurant</h1>
         <nav id="right">
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -37,9 +37,9 @@
     <section id="home"></section>
     <section id="menu">
         <h2 style="color:#cda45e;font-size: 1.5em;font-size: 36px;font-weight: 700;">Our Menu</h2>
-            <img src="{% static 'Waiter/Image/menu/0001.jpg'%}" alt="">
-            <img src="{% static 'Waiter/Image/menu/0002.jpg'%}" alt="">
-        </div>
+        <img src="{% static 'Waiter/Image/menu/0001.jpg'%}" alt="">
+        <img src="{% static 'Waiter/Image/menu/0002.jpg'%}" alt="">
+        <a class="btn" href="/menuCustomer/" target="_blank" id="explore-more">Explore More</a>
     </section>
 
     <section id="special-offer">
