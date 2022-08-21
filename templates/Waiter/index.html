@@ -1,0 +1,120 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'Waiter/index.css' %}">
+    <title>Italian Truffle Restaurant</title>
+</head>
+<body style="margin:0">
+    <header>
+        <h1 id="left">Italian Truffle Restaurant</h1>
+        <nav id="right">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#special-offer">Special Offer</a></li>
+                <li><a href="#location">Find Us</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+            <i class="material-icons" style="font-size: 50px;" onclick="show_mobile_nav()">menu</i>
+        </nav>
+    </header>
+
+    <div id="mobile-navbar">
+        <i style="float: right;font-size:20px;color:white;margin:10px 20px;" onclick="hide_mobile_nav()">x</i>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#special-offer">Special Offer</a></li>
+            <li><a href="#location">Find Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <section id="home"></section>
+    <section id="menu">
+        <h2 style="color:#cda45e;font-size: 1.5em;font-size: 36px;font-weight: 700;">Our Menu</h2>
+            <img src="{% static 'Waiter/Image/menu/0001.jpg'%}" alt="">
+            <img src="{% static 'Waiter/Image/menu/0002.jpg'%}" alt="">
+        </div>
+    </section>
+
+    <section id="special-offer">
+        <h2 style="color:#cda45e;font-size: 1.5em;font-size: 36px;font-weight: 700;margin:0">Special Offer</h2>
+        <img src="{% static 'Waiter/Image/menu/0003.jpg'%}" alt="">
+    </section>
+
+    <section id="location">
+        <h2 style="color:#cda45e;font-size: 1.5em;font-size: 36px;font-weight: 700;margin:0;text-align: center;">Find Us</h2>
+        <div style="float:right;width:calc(100% - 400px);min-width: 400px;max-height: 562px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2321.0691286539727!2d-2.9632909840038244!3d54.42641290096141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487cebf07df0b2e7%3A0xc733f5fdc960b798!2sItalian%20truffle%20restaurant!5e0!3m2!1sen!2suk!4v1660955473135!5m2!1sen!2suk" width="100%" height="100%" style="max-height: 562px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div style="float:right;margin-right: 10px;">
+            <div id="address">
+                <h2 style="margin:5px 0;text-align: center;">Italian Truffle Restaurant</h2>
+                Lake Rd <br>
+                LA22 0DH <br>
+                Ambleside 
+            </div>
+            <a href="https://goo.gl/maps/4boWkWugNRCfcFwR6" target="_blank" class="btn" style="margin:10px 0">GET DIRECTIONS</a>
+            <a href="mailto:info@italiantrufflerestaurant.co.uk" class="btn">EMAIL US</a> <br> <br>
+            <i class="material-icons" style="vertical-align: bottom;" style="margin:10px 0">access_alarm</i> Hours <br>
+            <table style="color:white">
+                <tr>
+                  <th>Day</th>
+                  <th>Time</th>
+                </tr>
+                <tr>
+                  <td>Monday</td>
+                  <td>Closed</td>
+                </tr>
+                <tr>
+                  <td>Tuesday</td>
+                  <td>CLosed</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>11:00–14:00 (booking only)<br> 17:00–22:30</td>
+                  </tr>
+                  <tr>
+                    <td>Thursday</td>
+                    <td>11:00–14:00 (booking only)<br> 17:00–22:30</td>
+                  </tr>
+                  <tr>
+                    <td>Friday</td>
+                    <td>11:00–14:00 (booking only)<br> 17:00–22:30</td>
+                  </tr>
+                  <tr>
+                    <td>Saturday</td>
+                    <td>11:00–14:00 (booking only)<br> 17:00–22:30</td>
+                  </tr>
+                  <tr>
+                    <td>Sunday</td>
+                    <td>11:00–14:00 (booking only)<br> 17:00–22:30</td>
+                  </tr>
+              </table>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 style="color:#cda45e;font-size: 1.5em;font-size: 36px;font-weight: 700;margin:0;text-align: center;">Contact Us</h2>
+        <div style="text-align: center;">
+            Need to get in touch with us? Either fill out the form with your inquiry or send an email to <a href="mailto:info@italiantrufflerestaurant.co.uk" style="color:whitesmoke">info@italiantrufflerestaurant.co.uk</a>.
+            We'll get in touch as soon as we can.
+        </div>
+        <form action="" style="margin: 10px;">
+            {% csrf_token %}
+            <input type="hidden" name="subject" id="subject" value="Enquiries"><br>
+            <input type="text" name="name" id="full-name" required placeholder="Name*">
+            <input type="email" name="email" id="email" placeholder="Email"><br>
+            <textarea name="message" id="message" cols="30" rows="10" placeholder="Message*"></textarea><br>
+            <button class="btn" id="submit">SUBMIT MESSAGE</button>
+        </form>
+    </section>
+
+    <script src="{% static 'Waiter/index.js' %}"></script>
+</body>
+</html>

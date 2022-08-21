@@ -68,3 +68,8 @@ class OrderKitchen(models.Model):
             'table':self.table.name,
             'dishes':self.dishes,
         }
+
+class Message(models.Model):
+    mail= models.CharField(max_length=256)
+    subject= models.CharField(max_length=256)
+    message= models.TextField()
