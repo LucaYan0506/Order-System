@@ -16,7 +16,7 @@ document.querySelector('form').onsubmit = () =>{
     return validation(document.querySelector('form'));
 }
 
-function validation(elem){
+function validation(form){
     const data = new FormData(form);
     fetch(`/send_message/`,{
         method: 'POST',
@@ -26,6 +26,6 @@ function validation(elem){
         body: data,
         credentials: 'same-origin',
     })
-
+    alert('Message submited')
     return false;
 }
