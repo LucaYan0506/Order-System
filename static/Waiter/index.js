@@ -11,3 +11,21 @@ document.querySelectorAll('#mobile-navbar li').forEach( el => {
         hide_mobile_nav();
     }
 })
+
+document.querySelector('form').onsubmit = () =>{
+    return validation(document.querySelector('form'));
+}
+
+function validation(elem){
+    const data = new FormData(form);
+    fetch(`/send_message/`,{
+        method: 'POST',
+        header: {  
+            'Content-Type': "multipart/form-data",
+        }, 
+        body: data,
+        credentials: 'same-origin',
+    })
+
+    return false;
+}
