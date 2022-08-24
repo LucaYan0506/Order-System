@@ -47,12 +47,13 @@
                 <div id="content">
                 </div>    
                 
-                The actual price is £<input id="actual_price" style=" font-size:1rem;padding-bottom: 5px;padding-top: 10px;" type="text">
+                The actual price is £<input type="number" step="0.01" id="actual_price" style=" font-size:1rem;padding-bottom: 5px;padding-top: 10px;" type="text">
             </div>
 
             <div style="position:absolute;left:0;bottom:0; width:calc(100% - 20px);padding:10px;">
                 <button class="btn" style="float:left;" id="cancel">Cancel</button>
                 <button class="btn" style="float:right;" id="pay">Pay</button>
+                <button class="btn" style="float:right;" id="print-receipt">Print Receipt</button>
                 <div style="clear:both"></div>
             </div>
         </div>
@@ -72,6 +73,23 @@
     </div>
 
     <script>
+        function PrintElem(elem){
+            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+            mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+            mywindow.document.write('</head><body >');
+            mywindow.document.write(elem.innerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            mywindow.print();
+            mywindow.close();
+
+            return true;
+        }
+
         function pay(pk,totCost){
             document.querySelector('#msgbox-container').style.display= 'flex';
             document.querySelector('#msgbox-container #content').innerHTML = 'The total price is £' + totCost;
@@ -105,6 +123,33 @@
                     },500)
                 )
 
+            };
+
+            document.querySelector('.btn#print-receipt').onclick = () => {
+                fetch(`/manager/order_info?pk=${pk}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    let order = data.order;
+
+                    const div = document.createElement('div');
+                
+                    const h1 = document.createElement('h1');
+                    h1.innerHTML = 'Italian Truffle Restaurant'
+
+                    const div1 = document.createElement('div');
+                    order.dishes.forEach(dish => {
+                        div1.innerHTML += `${dish.name} * ${dish.quantity} <span style="float:right">£${dish.price}</span> </br>`;
+                    })
+
+                    const div2 = document.createElement('div');
+                    div2.innerHTML = `<hr> Total <span style="float:right" >£${order.total_price}</span>`;
+
+                    div.appendChild(h1);
+                    div.appendChild(div1);
+                    div.appendChild(div2);
+                
+                    PrintElem(div);
+                });
             };
         }
     </script>

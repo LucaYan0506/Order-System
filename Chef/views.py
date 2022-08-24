@@ -111,6 +111,15 @@ def managerView(request):
         })
     return HttpResponseRedirect("/login/?link=manager")
 
+def order_detail(request):
+    if request.user.is_authenticated:
+        order = Order.objects.get(pk = request.GET.get('pk'))
+
+        return JsonResponse({
+            'order':order.serialize(),
+        },safe=False)
+
+    return HttpResponseRedirect(reverse('login'))
 
 def payOrder(request):
     if request.user.is_authenticated:
