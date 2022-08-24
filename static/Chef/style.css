@@ -14,7 +14,7 @@
     position:absolute;
     left:0;
     bottom:0;
-    width:100%;
+    width:calc(50% - 2px);
 }
 
 .btn{

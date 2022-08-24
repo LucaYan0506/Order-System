@@ -181,7 +181,7 @@ section#special-offer img{
     }
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 780px) {
     :root{
         --margin-size: 10px;
     }
@@ -204,10 +204,6 @@ section#special-offer img{
     #explore-more{
         width: calc(100% - 20px);
     }
-    
-}
-
-@media only screen and (max-width: 610px) {
     section#location{
         display: flex;
     }

@@ -16,7 +16,7 @@ def menuView(request):
 
         if request.GET.get('table'):
             table = Table.objects.get(pk = request.GET.get('table')) 
-            categories = Category.objects.filter(active=True)
+            categories = Category.objects.filter(active=True).order_by('priority')
             basket = None
             tot_basket = 0
             basket_price = 0
@@ -180,13 +180,13 @@ def orderFood(request):
 
 def menuCustomerView(request):
     return render(request,'Waiter/menuCustomer.html',{
-        'categories':Category.objects.filter(active=True)
+        'categories':Category.objects.filter(active=True).order_by('priority')
     })
 
     
 def indexView(request):
     return render(request,'Waiter/index.html',{
-        'categories':Category.objects.filter(active=True)
+        'categories':Category.objects.filter(active=True).order_by('priority')
     })
 
 

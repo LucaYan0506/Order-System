@@ -44,6 +44,24 @@ class Order(models.Model):
     #actually price
     actually_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     
+    def serialize(self):
+        dishes = []
+        tot_price = 0
+        for x in self.dishes_set.all():
+            tot_price += x.quantity * x.dish.price
+            dish = {
+                'name':x.dish.name,
+                'quantity':x.quantity,
+                'price':x.quantity * x.dish.price,
+                }
+            dishes.append(dish)
+            
+        return {
+            'pk':self.pk,
+            'dishes':dishes,
+            'total_price':tot_price,
+        }
+
 class Dishes(models.Model):
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
     quantity = models.IntegerField()

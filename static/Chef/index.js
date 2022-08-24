@@ -19,7 +19,27 @@ startSound.onclick = () => {
     mutipleBeep(4);
 }
 
-const socket = new WebSocket(`wss://${window.location.hostname}:8001/ws/chat/`);
+function PrintElem(elem)
+{
+    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write(elem.innerHTML);
+    mywindow.document.querySelector('h1').style.margin = '0'
+    mywindow.document.querySelector('h3').style.margin = '0'
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+
+const socket = new WebSocket(`ws://${window.location.host}/ws/chat/`);
 socket.onmessage = (event) => {
     startSound.click();
     var data = JSON.parse(event.data);
@@ -28,8 +48,8 @@ socket.onmessage = (event) => {
 
     const inner = document.createElement('div');
     inner.innerHTML = data['order']['dishes'];
-    inner.style.paddingBottom = '50px';
     inner.style.overflowY = 'auto';
+    inner.style.paddingBottom = '50px';
     div.append(inner);
 
     const button = document.createElement('button')
@@ -42,6 +62,19 @@ socket.onmessage = (event) => {
         startOrder(button);
     }
     div.append(button);
+
+    const button2 = document.createElement('button')
+    button2.innerText = 'Print';
+    button2.className = 'btn';
+    button2.style.background = 'red';
+    button2.style.color = 'white';
+    button2.style.left = 'inherit';
+    button2.style.right = '-5px';
+    button2.onclick = () => {
+        PrintElem(inner);
+    }
+    div.append(button2);
+    PrintElem(inner);
 
     document.querySelector('#order-container').append(div);
 
@@ -76,6 +109,18 @@ document.addEventListener('DOMContentLoaded',()=>{
                 startOrder(button);
             }
             div.append(button);
+
+            const button2 = document.createElement('button')
+            button2.innerText = 'Print';
+            button2.className = 'btn';
+            button2.style.background = 'red';
+            button2.style.color = 'white';
+            button2.style.left = 'inherit';
+            button2.style.right = '-5px';
+            button2.onclick = () => {
+                PrintElem(inner);
+            }
+            div.append(button2);
     
             document.querySelector('#order-container').append(div);
 
@@ -134,6 +179,7 @@ function completeOrder(button){
         order.parentElement.removeChild(order);
     }, 500);
 }
+
 
 function line(elem){
     if (elem.style.textDecoration == 'line-through')
