@@ -105,7 +105,7 @@
             Need to get in touch with us? Either fill out the form with your inquiry or send an email to <a href="mailto:info@italiantrufflerestaurant.co.uk" style="color:whitesmoke">info@italiantrufflerestaurant.co.uk</a>.
             We'll get in touch as soon as we can.
         </div>
-        <form action="" style="margin: 10px;">
+        <form onsubmit="return sendEmail()" style="margin: 10px;">
             {% csrf_token %}
             <input type="hidden" name="subject" id="subject" value="Enquiries"><br>
             <input type="text" name="name" id="full-name" required placeholder="Name*">
