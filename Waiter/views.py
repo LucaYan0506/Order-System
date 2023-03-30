@@ -7,7 +7,7 @@ from .email import send_feedback_email,send_to_me
 def selectTableView(request):
     if request.user.is_authenticated:
         return render(request,'Waiter/selectTable.html', {
-            'tables': Table.objects.all()
+            'tables': Table.objects.filter(available=True)
         })
     return HttpResponseRedirect("/login/?link=selectTable")
 

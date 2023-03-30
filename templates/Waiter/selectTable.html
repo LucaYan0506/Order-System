@@ -10,7 +10,11 @@
     <div id="table-container">
         <h1 style="text-align:center">Select a table</h1>
         {% for table in tables %}
+        {% if table.occupied %}
+            <div style="pointer-events: none; background: #f7c871;" id="table-{{table.pk}}">{{table.name}}</div>
+        {% else %}
             <div id="table-{{table.pk}}">{{table.name}}</div>
+        {% endif %}
         {% endfor %}
     </div>
 
